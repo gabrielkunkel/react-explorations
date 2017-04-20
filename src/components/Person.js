@@ -26,12 +26,12 @@ class Person extends Component {
     });
   }
 
-
+  // TODO: Add a dive on the person names, so at a click it loads the data into update panel (only if it's open)
     render() {
         return (
           <div>
             <input type="checkbox" name="person" checked={this.state.checked} onChange={this.checkboxToggle} />
-            {this.props.person.name} ({this.props.person.age})
+            <div onClick={this.props.openUpdatePersonPanel}> {this.props.person.name} ({this.props.person.age}) </div>
           </div>
         );
     }
@@ -39,7 +39,8 @@ class Person extends Component {
 
 Person.propTypes = {
   person: PropTypes.object.isRequired,
-  setForDelete: PropTypes.func.isRequired
+  setForDelete: PropTypes.func.isRequired,
+  updatePersonPanel: PropTypes.bool.isRequired
 };
 
 export default Person;

@@ -4,7 +4,8 @@ import {
   DELETE_RECORDS,
   SET_FOR_DELETE,
   UNSET_FOR_DELETE,
-  RESET_SET_FOR_DELETE_ARRAY
+  RESET_SET_FOR_DELETE_ARRAY,
+  TOGGLE_UPDATE_PANEL
 } from '../constants/actionTypes';
 import initialState from './initialState';
 
@@ -16,6 +17,8 @@ export default function formReducer(state = initialState.form, action) {
       return Object.assign({}, state, { people: [ ...state.people, action.newPerson] });
     case TOGGLE_ADD_PERSON_PANEL:
       return Object.assign({}, state, {addPersonPanel: !state.addPersonPanel});
+    case TOGGLE_UPDATE_PANEL:
+      return Object.assign({}, state, { updatePersonPanel: !state.updatePersonPanel })
     case SET_FOR_DELETE:
       return Object.assign({}, state, { setForDeleteArr: [ ...state.setForDeleteArr, action.personId]});
     case UNSET_FOR_DELETE:

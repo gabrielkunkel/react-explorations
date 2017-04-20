@@ -16,7 +16,13 @@ class PeopleList extends Component {
     return(
       <div>
         {this.props.people.map((person) => {
-          return <Person key={person._id} person={person} setForDelete={this.props.setForDelete} removeFromSetForDelete={this.props.removeFromSetForDelete} />;
+          return <Person
+            key={person._id}
+            person={person}
+            setForDelete={this.props.setForDelete}
+            removeFromSetForDelete={this.props.removeFromSetForDelete}
+            updatePersonPanel={this.props.updatePersonPanel}
+            />;
         })}
         <div onClick={() => this.props.deleteRecords()}>Delete Selected Records</div>
         <div onClick={() => this.props.resetSetForDeleteArr()}>Empty Array.</div>
@@ -31,7 +37,8 @@ PeopleList.propTypes = {
   people: PropTypes.array.isRequired,
   deleteRecords: PropTypes.func.isRequired,
   setForDelete: PropTypes.func.isRequired,
-  resetSetForDeleteArr: PropTypes.func.isRequired
+  resetSetForDeleteArr: PropTypes.func.isRequired,
+  updatePersonPanel: PropTypes.bool.isRequired
 };
 
 export default PeopleList;

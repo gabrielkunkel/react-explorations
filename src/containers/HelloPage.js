@@ -8,7 +8,7 @@ export const HelloPage = ({hello, actions}) => {
   return (
     <div>
       My name is {hello.name}. This is the hello page.
-      <div onClick={() => actions.sayHello()}>But my name could be different.</div>
+      <div onClick={() => actions.sayHello()}>But my name could be different. Click here.</div>
     </div>
   );
 };

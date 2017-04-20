@@ -4,7 +4,9 @@ import {
 	DELETE_RECORDS,
 	SET_FOR_DELETE,
 	UNSET_FOR_DELETE,
-	RESET_SET_FOR_DELETE_ARRAY
+	RESET_SET_FOR_DELETE_ARRAY,
+	UPDATE_RECORD,
+	TOGGLE_UPDATE_PANEL
 } from '../constants/actionTypes';
 
 export function addPerson( newPerson ) {
@@ -18,6 +20,12 @@ export function openAddPersonPanel() {
 	return {
 		type: TOGGLE_ADD_PERSON_PANEL
 	};
+}
+
+export function openUpdatePersonPanel() {
+	return {
+		type: TOGGLE_UPDATE_PANEL
+	}
 }
 
 export function setForDelete( personId ) {
@@ -46,3 +54,12 @@ export function deleteRecords( recIdArr ) {
 		recIdArr
 	};
 }
+
+export function updatePerson( person ) {
+	return {
+		type: UPDATE_RECORD,
+		person
+	}
+}
+
+// TODO: selectPersonToUpdate

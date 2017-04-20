@@ -6,14 +6,24 @@ import {connect} from 'react-redux';
 
 import PeopleList from '../components/PeopleList';
 import Form from '../components/Form';
+import UpdateForm from '../components/UpdateForm';
 
-const FormPage = ({people, addPersonPanel, actions}) => {
+const FormPage = ({people, addPersonPanel, updatePersonPanel, actions}) => {
 
   return (
     <div>
-      <div onClick={actions.openAddPersonPanel}>Add Person</div>
-      { addPersonPanel ? <Form addPerson={actions.addPerson} /> : null }
-      <PeopleList people={people} resetSetForDeleteArr={actions.resetSetForDeleteArr} setForDelete={actions.setForDelete} deleteRecords={actions.deleteRecords} removeFromSetForDelete={actions.removeFromSetForDelete}/>
+      <div onClick={actions.openAddPersonPanel}>Add Person</div> | <div onClick={actions.openUpdatePersonPanel}>Update Person</div>
+      { addPersonPanel ? <Form addPerson={actions.addPerson} /> :
+        updatePersonPanel ? <UpdateForm /> :
+        null }
+      <PeopleList people={people}
+        resetSetForDeleteArr={actions.resetSetForDeleteArr}
+        setForDelete={actions.setForDelete}
+        deleteRecords={actions.deleteRecords}
+        removeFromSetForDelete={actions.removeFromSetForDelete}
+        updatePersonPanel={updatePersonPanel}
+        openUpdatePersonPanel={actions.openUpdatePersonPanel}
+        />
     </div>
   );
 };
@@ -21,13 +31,15 @@ const FormPage = ({people, addPersonPanel, actions}) => {
 FormPage.propTypes = {
   people: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired,
-  addPersonPanel: PropTypes.bool.isRequired
+  addPersonPanel: PropTypes.bool.isRequired,
+  updatePersonPanel: PropTypes.bool.isRequired
 };
 
 function mapStateToProps(state) {
   return {
     people: state.form.people,
-    addPersonPanel: state.form.addPersonPanel
+    addPersonPanel: state.form.addPersonPanel,
+    updatePersonPanel: state.form.updatePersonPanel
   };
 }
 

@@ -40,6 +40,7 @@ export default {
       }
     ],
     addPersonPanel: false,
-    setForDeleteArr: []
+    updatePersonPanel: false,
+    setForDeleteArr: [] // TODO: Add remove from set to delete
   }
 };
