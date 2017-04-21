@@ -6,7 +6,8 @@ import {
 	UNSET_FOR_DELETE,
 	RESET_SET_FOR_DELETE_ARRAY,
 	UPDATE_RECORD,
-	TOGGLE_UPDATE_PANEL
+	TOGGLE_UPDATE_PANEL,
+	SET_FOR_UPDATE
 } from '../constants/actionTypes';
 
 export function addPerson( newPerson ) {
@@ -55,11 +56,16 @@ export function deleteRecords( recIdArr ) {
 	};
 }
 
+export function setForUpdate( person ) {
+	return {
+		type: SET_FOR_UPDATE,
+		person
+	}
+}
+
 export function updatePerson( person ) {
 	return {
 		type: UPDATE_RECORD,
 		person
 	}
 }
-
-// TODO: selectPersonToUpdate

@@ -10,7 +10,10 @@ class Person extends Component {
       checked: false
     };
 
+    console.log(this.props);
+
     this.checkboxToggle = this.checkboxToggle.bind(this);
+    this.nameClick = this.nameClick.bind(this);
   }
 
   checkboxToggle() {
@@ -26,12 +29,19 @@ class Person extends Component {
     });
   }
 
+  nameClick() {
+    this.props.openUpdatePersonPanel();
+    this.props.setForUpdate(this.props.person);
+  }
+
   // TODO: Add a dive on the person names, so at a click it loads the data into update panel (only if it's open)
     render() {
         return (
           <div>
             <input type="checkbox" name="person" checked={this.state.checked} onChange={this.checkboxToggle} />
-            <div onClick={this.props.openUpdatePersonPanel}> {this.props.person.name} ({this.props.person.age}) </div>
+            <span onClick={this.nameClick}>
+                {this.props.person.name} ({this.props.person.age})
+            </span>
           </div>
         );
     }
@@ -40,7 +50,10 @@ class Person extends Component {
 Person.propTypes = {
   person: PropTypes.object.isRequired,
   setForDelete: PropTypes.func.isRequired,
-  updatePersonPanel: PropTypes.bool.isRequired
+  updatePersonPanel: PropTypes.bool.isRequired,
+  removeFromSetForDelete: PropTypes.func.isRequired,
+  openUpdatePersonPanel: PropTypes.func.isRequired,
+  setForUpdate: PropTypes.func.isRequired
 };
 
 export default Person;

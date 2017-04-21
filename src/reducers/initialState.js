@@ -41,6 +41,12 @@ export default {
     ],
     addPersonPanel: false,
     updatePersonPanel: false,
-    setForDeleteArr: [] // TODO: Add remove from set to delete
+    personToUpdate: {
+      _id: "",
+      name: "",
+      city: "",
+      age: ""
+    },
+    setForDeleteArr: []
   }
 };

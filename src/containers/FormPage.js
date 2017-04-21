@@ -8,14 +8,18 @@ import PeopleList from '../components/PeopleList';
 import Form from '../components/Form';
 import UpdateForm from '../components/UpdateForm';
 
-const FormPage = ({people, addPersonPanel, updatePersonPanel, actions}) => {
+const FormPage = ({people, addPersonPanel, updatePersonPanel, personToUpdate, actions}) => {
 
   return (
     <div>
-      <div onClick={actions.openAddPersonPanel}>Add Person</div> | <div onClick={actions.openUpdatePersonPanel}>Update Person</div>
-      { addPersonPanel ? <Form addPerson={actions.addPerson} /> :
-        updatePersonPanel ? <UpdateForm /> :
-        null }
+      <div>
+        <div onClick={actions.openAddPersonPanel}>Add Person</div>
+      </div>
+      <div>
+        { addPersonPanel ? <Form addPerson={actions.addPerson} /> :
+          updatePersonPanel ? <UpdateForm personToUpdate={personToUpdate} updatePerson={actions.updatePerson} openUpdatePersonPanel={actions.openUpdatePersonPanel}/> :
+          null }
+      </div>
       <PeopleList people={people}
         resetSetForDeleteArr={actions.resetSetForDeleteArr}
         setForDelete={actions.setForDelete}
@@ -23,23 +27,28 @@ const FormPage = ({people, addPersonPanel, updatePersonPanel, actions}) => {
         removeFromSetForDelete={actions.removeFromSetForDelete}
         updatePersonPanel={updatePersonPanel}
         openUpdatePersonPanel={actions.openUpdatePersonPanel}
+        setForUpdate={actions.setForUpdate}
+        personToUpdate={personToUpdate}
+        openUpdatePersonPanel={actions.openUpdatePersonPanel}
         />
     </div>
   );
 };
 
 FormPage.propTypes = {
-  people: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired,
+  people: PropTypes.array.isRequired,
   addPersonPanel: PropTypes.bool.isRequired,
-  updatePersonPanel: PropTypes.bool.isRequired
+  updatePersonPanel: PropTypes.bool.isRequired,
+  personToUpdate: PropTypes.object
 };
 
 function mapStateToProps(state) {
   return {
     people: state.form.people,
     addPersonPanel: state.form.addPersonPanel,
-    updatePersonPanel: state.form.updatePersonPanel
+    updatePersonPanel: state.form.updatePersonPanel,
+    personToUpdate: state.form.personToUpdate
   };
 }
 
