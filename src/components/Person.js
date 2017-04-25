@@ -10,11 +10,11 @@ class Person extends Component {
       checked: false
     };
 
-    console.log(this.props);
-
     this.checkboxToggle = this.checkboxToggle.bind(this);
     this.nameClick = this.nameClick.bind(this);
   }
+
+  // TODO: Turn this into a pure stateless component (add this task to list, do commit)
 
   checkboxToggle() {
 
@@ -30,8 +30,15 @@ class Person extends Component {
   }
 
   nameClick() {
-    this.props.openUpdatePersonPanel();
-    this.props.setForUpdate(this.props.person);
+    if (this.props.person._id !== this.props.personToUpdate._id) {
+      // this.props.toggleUpdatePersonPanel();
+      this.props.setForUpdate(this.props.person);
+      this.forceUpdate();
+    }
+    else {
+      this.props.toggleUpdatePersonPanel();
+    }
+
   }
 
   // TODO: Add a dive on the person names, so at a click it loads the data into update panel (only if it's open)
@@ -52,8 +59,9 @@ Person.propTypes = {
   setForDelete: PropTypes.func.isRequired,
   updatePersonPanel: PropTypes.bool.isRequired,
   removeFromSetForDelete: PropTypes.func.isRequired,
-  openUpdatePersonPanel: PropTypes.func.isRequired,
-  setForUpdate: PropTypes.func.isRequired
+  toggleUpdatePersonPanel: PropTypes.func.isRequired,
+  setForUpdate: PropTypes.func.isRequired,
+  personToUpdate: PropTypes.object.isRequired
 };
 
 export default Person;

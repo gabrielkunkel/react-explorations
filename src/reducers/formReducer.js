@@ -8,6 +8,7 @@ import {
   TOGGLE_UPDATE_PANEL,
   UNSET_FOR_DELETE,
   UPDATE_RECORD,
+  HANDLE_INPUT_CHANGE
 } from '../constants/actionTypes';
 
 import initialState from './initialState';
@@ -20,14 +21,28 @@ export default function formReducer(state = initialState.form, action) {
       return Object.assign({}, state, { people: [ ...state.people, action.newPerson] });
     case TOGGLE_ADD_PERSON_PANEL:
       return Object.assign({}, state, {addPersonPanel: !state.addPersonPanel});
-    case TOGGLE_UPDATE_PANEL: // take the user ID as a value and store it, if it's the same toggle and if not don't
-      // add person id to the place where the form is submitted, as well.
-      // basically the focus person is the "close button"
-      return Object.assign({}, state, { updatePersonPanel: !state.updatePersonPanel })
+    case TOGGLE_UPDATE_PANEL: // TODO: Switch out for KILL_UPDATE_PANEL
+      return Object.assign({}, state, { updatePersonPanel: false }, { personToUpdate: {
+        _id: "",
+        name: "",
+        city: "",
+        age: ""
+      }});
+      // if you click on a person AND it's closed THEN it opens  Toggles if you click on a person.
+      // if you click on a person AND it's open THEN it closes
+
+
+      // return state.personToUpdate._id === "" ? Object.assign({}, state, { updatePersonPanel: !state.updatePersonPanel }) :
+      //         state.personToUpdate._id === action.personId ? Object.assign({}, state, { updatePersonPanel: !state.updatePersonPanel }, { personToUpdate: {
+      //               _id: "",
+      //               name: "",
+      //               city: "",
+      //               age: ""
+      //             }}) : state;
     case SET_FOR_DELETE:
       return Object.assign({}, state, { setForDeleteArr: [ ...state.setForDeleteArr, action.personId]});
-    case SET_FOR_UPDATE:
-      return state.updatePersonPanel ? Object.assign({}, state, { personToUpdate: action.person }) : state;
+    case SET_FOR_UPDATE:  // { updatePersonPanel: true } // TODO: If it's the same one in personToUpdate then updatePersonPanel: true, otherwise false.
+      return Object.assign({}, state, { personToUpdate: action.person }, { updatePersonPanel: true });
     case UNSET_FOR_DELETE:
       filteredPeople = state.setForDeleteArr.filter((personId) => {
         return action.personId !== personId ? true : false;
@@ -47,7 +62,14 @@ export default function formReducer(state = initialState.form, action) {
         return person._id === action.person._id ? false : true;
       }); // end filter
 
-      return Object.assign({}, state, { people: [ ...filteredPeople, action.person] });
+      return Object.assign({}, state, { people: [ ...filteredPeople, action.person] }, { personToUpdate: {
+        _id: "",
+        name: "",
+        city: "",
+        age: ""
+      }}, { updatePersonPanel: false });
+    case HANDLE_INPUT_CHANGE:
+      return Object.assign({}, state, { personToUpdate: action.person });
     default:
       return state;
   }

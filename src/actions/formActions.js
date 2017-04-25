@@ -1,13 +1,14 @@
 import {
 	ADD_PERSON,
-	TOGGLE_ADD_PERSON_PANEL,
 	DELETE_RECORDS,
-	SET_FOR_DELETE,
-	UNSET_FOR_DELETE,
 	RESET_SET_FOR_DELETE_ARRAY,
-	UPDATE_RECORD,
+	SET_FOR_DELETE,
+	SET_FOR_UPDATE,
+	TOGGLE_ADD_PERSON_PANEL,
 	TOGGLE_UPDATE_PANEL,
-	SET_FOR_UPDATE
+	UNSET_FOR_DELETE,
+	UPDATE_RECORD,
+	HANDLE_INPUT_CHANGE,
 } from '../constants/actionTypes';
 
 export function addPerson( newPerson ) {
@@ -23,9 +24,9 @@ export function openAddPersonPanel() {
 	};
 }
 
-export function openUpdatePersonPanel() {
+export function toggleUpdatePersonPanel() {
 	return {
-		type: TOGGLE_UPDATE_PANEL
+		type: TOGGLE_UPDATE_PANEL,
 	}
 }
 
@@ -66,6 +67,13 @@ export function setForUpdate( person ) {
 export function updatePerson( person ) {
 	return {
 		type: UPDATE_RECORD,
+		person
+	}
+}
+
+export function handleInputChange(person) {
+	return {
+		type: HANDLE_INPUT_CHANGE,
 		person
 	}
 }

@@ -17,7 +17,11 @@ const FormPage = ({people, addPersonPanel, updatePersonPanel, personToUpdate, ac
       </div>
       <div>
         { addPersonPanel ? <Form addPerson={actions.addPerson} /> :
-          updatePersonPanel ? <UpdateForm personToUpdate={personToUpdate} updatePerson={actions.updatePerson} openUpdatePersonPanel={actions.openUpdatePersonPanel}/> :
+          updatePersonPanel ? <UpdateForm personToUpdate={personToUpdate}
+                                updatePerson={actions.updatePerson}
+                                toggleUpdatePersonPanel={actions.toggleUpdatePersonPanel}
+                                handleInputChange={actions.handleInputChange}
+                                /> :
           null }
       </div>
       <PeopleList people={people}
@@ -26,10 +30,10 @@ const FormPage = ({people, addPersonPanel, updatePersonPanel, personToUpdate, ac
         deleteRecords={actions.deleteRecords}
         removeFromSetForDelete={actions.removeFromSetForDelete}
         updatePersonPanel={updatePersonPanel}
-        openUpdatePersonPanel={actions.openUpdatePersonPanel}
+        toggleUpdatePersonPanel={actions.toggleUpdatePersonPanel}
         setForUpdate={actions.setForUpdate}
         personToUpdate={personToUpdate}
-        openUpdatePersonPanel={actions.openUpdatePersonPanel}
+        toggleUpdatePersonPanel={actions.toggleUpdatePersonPanel}
         />
     </div>
   );

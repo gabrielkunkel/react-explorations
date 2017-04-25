@@ -23,11 +23,11 @@ class PeopleList extends Component {
             removeFromSetForDelete={this.props.removeFromSetForDelete}
             updatePersonPanel={this.props.updatePersonPanel}
             setForUpdate={this.props.setForUpdate}
-            openUpdatePersonPanel={this.props.openUpdatePersonPanel}
+            toggleUpdatePersonPanel={this.props.toggleUpdatePersonPanel}
+            personToUpdate={this.props.personToUpdate}
             />;
         })}
         <div onClick={() => this.props.deleteRecords()}>Delete Selected Records</div>
-        <div onClick={() => this.props.resetSetForDeleteArr()}>Empty Array.</div>
       </div>
     );
   }
@@ -41,7 +41,8 @@ PeopleList.propTypes = {
   setForDelete: PropTypes.func.isRequired,
   resetSetForDeleteArr: PropTypes.func.isRequired,
   updatePersonPanel: PropTypes.bool.isRequired,
-  openUpdatePersonPanel: PropTypes.func.isRequired
+  toggleUpdatePersonPanel: PropTypes.func.isRequired,
+  personToUpdate: PropTypes.object.isRequired
 };
 
 export default PeopleList;
