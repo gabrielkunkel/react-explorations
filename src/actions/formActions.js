@@ -71,9 +71,10 @@ export function updatePerson( person ) {
 	}
 }
 
-export function handleInputChange(person) {
+export function handleInputChange(field, text) {
 	return {
 		type: HANDLE_INPUT_CHANGE,
-		person
+		field,
+		text
 	}
 }

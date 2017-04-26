@@ -28,17 +28,6 @@ export default function formReducer(state = initialState.form, action) {
         city: "",
         age: ""
       }});
-      // if you click on a person AND it's closed THEN it opens  Toggles if you click on a person.
-      // if you click on a person AND it's open THEN it closes
-
-
-      // return state.personToUpdate._id === "" ? Object.assign({}, state, { updatePersonPanel: !state.updatePersonPanel }) :
-      //         state.personToUpdate._id === action.personId ? Object.assign({}, state, { updatePersonPanel: !state.updatePersonPanel }, { personToUpdate: {
-      //               _id: "",
-      //               name: "",
-      //               city: "",
-      //               age: ""
-      //             }}) : state;
     case SET_FOR_DELETE:
       return Object.assign({}, state, { setForDeleteArr: [ ...state.setForDeleteArr, action.personId]});
     case SET_FOR_UPDATE:  // { updatePersonPanel: true } // TODO: If it's the same one in personToUpdate then updatePersonPanel: true, otherwise false.
@@ -68,8 +57,13 @@ export default function formReducer(state = initialState.form, action) {
         city: "",
         age: ""
       }}, { updatePersonPanel: false });
-    case HANDLE_INPUT_CHANGE:
-      return Object.assign({}, state, { personToUpdate: action.person });
+    case HANDLE_INPUT_CHANGE: // field, text
+      console.log(action.proxy.get(target));
+      let personUpdated = Object.assign({}, state.personToUpdate, {
+        [action.field]: action.event.target.value
+      })
+
+      return Object.assign({}, state, { personToUpdate: personUpdated });
     default:
       return state;
   }
