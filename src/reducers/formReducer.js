@@ -58,9 +58,9 @@ export default function formReducer(state = initialState.form, action) {
         age: ""
       }}, { updatePersonPanel: false });
     case HANDLE_INPUT_CHANGE: // field, text
-      console.log(action.proxy.get(target));
+      console.log(action.text.target);
       let personUpdated = Object.assign({}, state.personToUpdate, {
-        [action.field]: action.event.target.value
+        [action.field]: action.text.value
       })
 
       return Object.assign({}, state, { personToUpdate: personUpdated });
